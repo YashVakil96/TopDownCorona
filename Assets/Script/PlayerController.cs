@@ -5,28 +5,31 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
  #region Variables
-public float speed;
 
-private Rigidbody2D rb;
+public float MoveSpeed=5f;
+public Rigidbody2D rb;
+public Camera cam;
+
+Vector2 Movement;
+Vector2 MousePos;
+
  #endregion
 
  #region System Methods
-
-/// <summary>
-/// Start is called on the frame when a script is enabled just before
-/// any of the Update methods is called the first time.
-/// </summary>
-void Start()
-{
-    rb=GetComponent<Rigidbody2D>();
-}//start
-
  private void Update() {
-     if(Input.GetKey(KeyCode.UpArrow))
-     {
-        //  transform.position = transform.up*speed*Time.deltaTime;
-     }
+     Movement.x = Input.GetAxisRaw("Horizontal");
+     Movement.y = Input.GetAxisRaw("Vertical");
+
+    MousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+
  }//update
+
+ private void FixedUpdate() {
+      rb.MovePosition(rb.position+Movement*MoveSpeed*Time.fixedDeltaTime);
+      Vector2 lookDir= MousePos - rb.position;
+      float angle=Mathf.Atan2(lookDir.y,lookDir.x)*Mathf.Rad2Deg-90f;
+      rb.rotation = angle; 
+ }//fixed update
  #endregion
 
  #region User Define Methods
