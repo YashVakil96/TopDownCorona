@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Shooting : MonoBehaviour
 {
@@ -26,7 +24,7 @@ public class Shooting : MonoBehaviour
     {
         GameObject bullet = Instantiate(BulletPrefab,GunPoint.position,GunPoint.rotation);
         Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
-        bulletRb.AddForce(GunPoint.up * BulletForce,ForceMode2D.Impulse);
+        bulletRb.AddForce(GunPoint.up * BulletForce,ForceMode2D.Impulse) ;
     }
     #endregion
 }//class

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
@@ -8,11 +6,15 @@ public class Bullet : MonoBehaviour
         //create an explosion effect or hit effect
         //destroy the effect after its work is done
         Debug.Log(other.gameObject.name);
+        //Destroy bullet on collision
         if(other.gameObject.name=="Top" || other.gameObject.name=="Bottom" || other.gameObject.name=="Left" || other.gameObject.name=="Right")
         {
             Destroy(gameObject);
         }
-        
-        
+        else if(other.gameObject.tag=="Enemy")
+        {
+            Destroy(other.gameObject);
+            Destroy(gameObject);
+        }
     }
 }//class

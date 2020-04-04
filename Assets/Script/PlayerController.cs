@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -26,13 +24,17 @@ Vector2 MousePos;
 
  private void FixedUpdate() {
       rb.MovePosition(rb.position+Movement*MoveSpeed*Time.fixedDeltaTime);
-      Vector2 lookDir= MousePos - rb.position;
-      float angle=Mathf.Atan2(lookDir.y,lookDir.x)*Mathf.Rad2Deg-90f;
-      rb.rotation = angle; 
+     Aim();
  }//fixed update
  #endregion
 
  #region User Define Methods
+ void Aim()
+ {
+    Vector2 lookDir= MousePos - rb.position;
+    float angle=Mathf.Atan2(lookDir.y,lookDir.x)*Mathf.Rad2Deg-90f;
+    rb.rotation = angle; 
+ }
  #endregion
 
 }//class
