@@ -1,13 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
     #region Variable
-    public Transform Player;
     public float MoveSpeed=.3f;
 
+    private  Transform Player;
     private Vector2 Movement;
     private Rigidbody2D rb;
     #endregion
@@ -16,9 +14,12 @@ public class Enemy : MonoBehaviour
     private void Start() 
     {
         rb=GetComponent<Rigidbody2D>();
+        Physics2D.IgnoreLayerCollision(8,9);
+        Player = GameObject.FindGameObjectWithTag("Player").transform;
     }//Start
-
-    private void FixedUpdate() {
+  
+    private void FixedUpdate() 
+    {
         Vector2 Direction = Player.position - transform.position;
         float angle = Mathf.Atan2(Direction.y,Direction.x)*Mathf.Rad2Deg-90f;
         rb.rotation=angle;
